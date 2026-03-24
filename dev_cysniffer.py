@@ -51,17 +51,14 @@ def activate_main_window(window):
 
 
 def trigger_start_from_ui(main_window):
-    # Try common labeled controls with mouse click (skip slow menu_select).
+    # Try common labeled controls. Prefer invoke() so overlap/z-order does not block action.
     label_patterns = [
         r"start",
         r"record",
         r"run",
         r"resume",
-        r"開始",
-        r"錄製",
-        r"啟動",
-        r"开始",
-        r"录制",
+        r"begin",
+        r"capture",
     ]
 
     # Search buttons by label and click fastest candidate.
@@ -80,10 +77,78 @@ def trigger_start_from_ui(main_window):
 
         if any(re.search(p, text, re.IGNORECASE) for p in label_patterns):
             try:
+                ctrl.invoke()
+                return True
+            except:
+                pass
+            try:
                 ctrl.click_input()
                 return True
             except:
                 pass
+
+    return False
+
+
+def _has_button_with_label(main_window, label_patterns):
+    for ctrl in main_window.descendants(control_type="Button"):
+        try:
+            if not ctrl.is_visible():
+                continue
+        except:
+            continue
+
+        text = ""
+        try:
+            text = ctrl.window_text() or ""
+        except:
+            pass
+
+        if any(re.search(p, text, re.IGNORECASE) for p in label_patterns):
+            return True
+
+    return False
+
+
+def _wait_for_cy4500_recording(main_window, timeout_seconds=2.0):
+    # Validate recording by polling for a stop-like button that appears in capture state.
+    stop_patterns = [r"stop", r"pause", r"end"]
+    deadline = time.time() + timeout_seconds
+    while time.time() < deadline:
+        if _has_button_with_label(main_window, stop_patterns):
+            return True
+        time.sleep(0.1)
+    return False
+
+
+def _start_cy4500_with_retry(main_window, max_retries=3):
+    for attempt in range(1, max_retries + 1):
+        activate_main_window(main_window)
+
+        used_method = "ui_button"
+        action_sent = trigger_start_from_ui(main_window)
+        if not action_sent:
+            used_method = "ctrl_r"
+            action_sent = send_ctrl_r(main_window)
+
+        started = False
+        if action_sent:
+            started = _wait_for_cy4500_recording(main_window, timeout_seconds=1.5)
+
+        log_checkpoint(
+            "CY4500",
+            "CAPTURE_START",
+            "CY4500 start attempt",
+            attempt=attempt,
+            method=used_method,
+            action_sent=action_sent,
+            started=started,
+        )
+
+        if started:
+            return True
+
+        time.sleep(0.3)
 
     return False
 
@@ -214,11 +279,17 @@ def CySniffer_StartCapture():
 #        main_window = app.window(title="CY4500 EZ-PD™ Protocol Analyzer Utility")
         main_window = app.window(title_re="EZ-PD™ Protocol Analyzer Utility")
 
-        activate_main_window(main_window)
+        started = _start_cy4500_with_retry(main_window, max_retries=3)
+        if started:
+            log_checkpoint("CY4500", "CAPTURE_START", "CY4500 capture started")
+            return
 
-        # Use direct mouse click on Start button (fastest approach)
-        started = trigger_start_from_ui(main_window)
-        log_checkpoint("CY4500", "CAPTURE_START", "CY4500 start button action sent", success=started)
+        log_checkpoint(
+            "CY4500",
+            "CAPTURE_START",
+            "CY4500 start could not be verified; possible window overlap or focus issue",
+        )
+        raise RuntimeError("CY4500 start could not be verified. Ensure CY4500 app is visible and not overlapped.")
     else:
         log_checkpoint("CY4500", "CAPTURE_START", "CY4500 app not found; start skipped")
 
