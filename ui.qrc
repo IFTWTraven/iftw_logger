@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="img">
+    <file>docs/ellisys_pins.png</file>
+    <file>docs/IFX_logo.ico</file>
+    <file>docs/IFX_logo.png</file>
+    <file>docs/background.png</file>
+  </qresource>
+</RCC>

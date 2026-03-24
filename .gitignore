@@ -1,0 +1,10 @@
+!*.dll
+!*.bat
+!*.exe
+
+__pycache__
+20*
+build
+dist
+workspace
+*.spec

@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registers>
+  <register reg.addr0="0x0000" reg.addr1="0x0000" reg.name="Device_Mode" reg.length="1">
+    <field field.name="HPI_Version" field.shift="7" field.mask="1" field.type="STRING" field.value="0" field.str="HPIv1" />
+    <field field.name="HPI_Version" field.shift="7" field.mask="1" field.type="STRING" field.value="1" field.str="HPIv2" />
+    <field field.name="Row_Size" field.shift="4" field.mask="3" field.type="STRING" field.value="0" field.str="128-Byte" />
+    <field field.name="Row_size" field.shift="4" field.mask="3" field.type="STRING" field.value="1" field.str="256-Byte" />
+    <field field.name="Row_size" field.shift="4" field.mask="3" field.type="STRING" field.value="3" field.str="64-Byte" />
+    <field field.name="Num_Port" field.shift="2" field.mask="3" field.type="STRING" field.value="0" field.str="1-port" />
+    <field field.name="Num_Port" field.shift="2" field.mask="3" field.type="STRING" field.value="1" field.str="2-port" />
+    <field field.name="FW_Mode" field.shift="0" field.mask="3" field.type="STRING" field.value="0" field.str="Boot" />
+    <field field.name="FW_Mode" field.shift="0" field.mask="3" field.type="STRING" field.value="1" field.str="FW1" />
+    <field field.name="FW_Mode" field.shift="0" field.mask="3" field.type="STRING" field.value="2" field.str="FW2" />
+  </register>
+  <register reg.addr0="0x0001" reg.addr1="0x0001" reg.name="Boot_Reason" reg.length="1">
+    <field field.name="FW2_Valid" field.shift="2" field.mask="1" field.type="STRING" field.value="0" field.str="Yes" />
+    <field field.name="FW2_Valid" field.shift="2" field.mask="1" field.type="STRING" field.value="1" field.str="No" />
+    <field field.name="Boot_Req" field.shift="0" field.mask="1" field.type="STRING" field.value="0" field.str="No" />
+    <field field.name="Boot_Req" field.shift="0" field.mask="1" field.type="STRING" field.value="1" field.str="Yes" />
+  </register>
+  <register reg.addr0="0x0002" reg.addr1="0x0002" reg.name="Silicon_ID" reg.length="2">
+    <field field.name="NONE" field.shift="0" field.mask="0xFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0004" reg.addr1="0x0004" reg.name="BOOT_LAST_ROW" reg.length="2">
+    <field field.name="NONE" field.shift="0" field.mask="0xFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0006" reg.addr1="0x0006" reg.name="INTR_REG" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="1" field.type="STRING" field.value="1" field.str="DEV_INTR" />
+    <field field.name="NONE" field.shift="1" field.mask="1" field.type="STRING" field.value="1" field.str="PORT0_INTR" />
+    <field field.name="NONE" field.shift="2" field.mask="1" field.type="STRING" field.value="1" field.str="PORT1_INTR" />
+    <field field.name="NONE" field.shift="3" field.mask="1" field.type="STRING" field.value="1" field.str="ICL_INTR" />
+    <field field.name="NONE" field.shift="7" field.mask="1" field.type="STRING" field.value="1" field.str="UCSI_INTR" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0" field.str="No_INTR" />
+  </register>
+  <register reg.addr0="0x0007" reg.addr1="0x0007" reg.name="JUMP_TO_BOOT" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x4A" field.str="Jump_To_Boot" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x41" field.str="Jump_To_Alt_FW" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x00" field.str="No_Jump" />
+  </register>
+  <register reg.addr0="0x0008" reg.addr1="0x0008" reg.name="RESET" reg.length="2">
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x52" field.str="Reset_Triggered" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x00" field.str="No_Reset_Triggered" />
+    <field field.name="NONE" field.shift="9" field.mask="0x01" field.type="STRING" field.value="0" field.str="I2C_Reset" />
+    <field field.name="NONE" field.shift="9" field.mask="0x01" field.type="STRING" field.value="1" field.str="Device_Reset" />
+  </register>
+  <register reg.addr0="0x000A" reg.addr1="0x000A" reg.name="ENTER_FLASH_MODE" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x50" field.str="Flash_Mode_Triggered" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x00" field.str="No_Flash_Mode_Triggered" />
+  </register>
+  <register reg.addr0="0x000B" reg.addr1="0x000B" reg.name="VALIDATE_MODE" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x01" field.str="Validate_FW1" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x02" field.str="Validate_FW2" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x04" field.str="Validate_2nd_Extension" />
+  </register>
+  <register reg.addr0="0x000C" reg.addr1="0x000C" reg.name="FLASH_ROW_RW" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x45" field.str="Flash_RW_Triggered" />
+    <field field.name="NONE" field.shift="8" field.mask="0x03" field.type="STRING" field.value="0x00" field.str="Flash_Read" />
+    <field field.name="NONE" field.shift="8" field.mask="0x03" field.type="STRING" field.value="0x01" field.str="Flash_Write" />
+    <field field.name="NONE" field.shift="8" field.mask="0x03" field.type="STRING" field.value="0x02" field.str="FWCT_Write" />
+    <field field.name="NONE" field.shift="8" field.mask="0x03" field.type="STRING" field.value="0x03" field.str="FWCT_Read" />
+    <field field.name="Row_Index" field.shift="16" field.mask="0xFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0010" reg.addr1="0x0010" reg.name="READ_ALL_VERSION" reg.length="16">
+    <field field.name="BL_Version" field.shift="0" field.mask="0xFFFFFFFFFFFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="FW_Version" field.shift="64" field.mask="0xFFFFFFFFFFFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="FW_Version" field.shift="128" field.mask="0xFFFFFFFFFFFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0020" reg.addr1="0x0020" reg.name="FW2_VERSION" reg.length="8">
+    <field field.name="Version" field.shift="0" field.mask="0xFFFFFFFFFFFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0028" reg.addr1="0x0028" reg.name="FW_BINARY_LOCATION" reg.length="4">
+    <field field.name="FW1_Location" field.shift="0" field.mask="0xFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="FW2_Location" field.shift="16" field.mask="0xFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x002C" reg.addr1="0x002C" reg.name="PORT_ENABLE" reg.length="1">
+    <field field.name="Port0" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0" field.str="Not_Enabled" />
+    <field field.name="Port1" field.shift="1" field.mask="0x01" field.type="STRING" field.value="0" field.str="Not_enabled" />
+    <field field.name="Port0" field.shift="0" field.mask="0x01" field.type="STRING" field.value="1" field.str="Enabled" />
+    <field field.name="Port1" field.shift="1" field.mask="0x01" field.type="STRING" field.value="1" field.str="enabled" />
+  </register>
+  <register reg.addr0="0x002D" reg.addr1="0x002D" reg.name="SLEEP_CTRL" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0" field.str="Deep_Sleep_Enabled" />
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="1" field.str="Deep_Sleep_Disabled" />
+  </register>
+  <register reg.addr0="0x002E" reg.addr1="0x002E" reg.name="POWER_STAT" reg.length="1">
+    <field field.name="External_Power" field.shift="1" field.mask="0x01" field.type="STRING" field.value="0" field.str="Available" />
+    <field field.name="External_Power" field.shift="1" field.mask="0x01" field.type="STRING" field.value="1" field.str="Not_Available" />
+    <field field.name="External_Power_Type" field.shift="2" field.mask="0x01" field.type="STRING" field.value="0" field.str="DC" />
+    <field field.name="External_Power_Type" field.shift="2" field.mask="0x01" field.type="STRING" field.value="1" field.str="AC" />
+    <field field.name="Battery_Present" field.shift="3" field.mask="0x01" field.type="STRING" field.value="0" field.str="Presented" />
+    <field field.name="Battery_Present" field.shift="3" field.mask="0x01" field.type="STRING" field.value="1" field.str="Not_Presented" />
+    <field field.name="Internal_Power" field.shift="4" field.mask="0x01" field.type="STRING" field.value="0" field.str="Battery_Source" />
+    <field field.name="Internal_Power" field.shift="4" field.mask="0x01" field.type="STRING" field.value="1" field.str="Not_Battery_Source" />
+  </register>
+  <register reg.addr0="0x002F" reg.addr1="0x002F" reg.name="SET_FW_PRIORITY" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0030" reg.addr1="0x0030" reg.name="READ_CUSTOMER_INFO" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0031" reg.addr1="0x0031" reg.name="BATTERY_STAT" reg.length="1">
+    <field field.name="Hot_Swap_Battery" field.shift="4" field.mask="0x0F" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Fixed_Battery" field.shift="0" field.mask="0x0F" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0032" reg.addr1="0x0032" reg.name="WDT_RST_COUNT" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0033" reg.addr1="0x0033" reg.name="READ_DIE_INFO" reg.length="32">
+    <field field.name="DIE_LOT" field.shift="0" field.mask="0xFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="DIE_WAFER" field.shift="24" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="DIE_X" field.shift="32" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="DIE_Y" field.shift="40" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="DIE_SORT" field.shift="48" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="DIE_MINOR" field.shift="56" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="DIE_PID" field.shift="64" field.mask="0xFFFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x003A" reg.addr1="0x003A" reg.name="CFG_TABLE_VERS" reg.length="1">
+    <field field.name="Major" field.shift="4" field.mask="0x0F" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Minor" field.shift="0" field.mask="0x0F" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x003B" reg.addr1="0x003B" reg.name="SYS_PWR_VERS" reg.length="1">
+    <field field.name="State" field.shift="0" field.mask="0x03" field.type="STRING" field.value="0" field.str="S0" />
+    <field field.name="State" field.shift="0" field.mask="0x03" field.type="STRING" field.value="1" field.str="S3" />
+    <field field.name="State" field.shift="0" field.mask="0x03" field.type="STRING" field.value="2" field.str="S4" />
+    <field field.name="State" field.shift="0" field.mask="0x03" field.type="STRING" field.value="3" field.str="S5" />
+  </register>
+  <register reg.addr0="0x003C" reg.addr1="0x003C" reg.name="HPI_VERSION" reg.length="4">
+    <field field.name="FW_Architecture" field.shift="31" field.mask="0x01" field.type="STRING" field.value="0" field.str="Legacy" />
+    <field field.name="FW_Architecture" field.shift="31" field.mask="0x01" field.type="STRING" field.value="1" field.str="Hybrid" />
+    <field field.name="2nd_Extsion_Enabled" field.shift="30" field.mask="0x01" field.type="STRING" field.value="0" field.str="No" />
+    <field field.name="2nd_Extsion_Enabled" field.shift="30" field.mask="0x01" field.type="STRING" field.value="1" field.str="Yes" />
+    <field field.name="Boot_Mode" field.shift="28" field.mask="0x03" field.type="STRING" field.value="0" field.str="Legacy_No_Authentication" />
+    <field field.name="Boot_Mode" field.shift="28" field.mask="0x03" field.type="STRING" field.value="1" field.str="Authenticated_Boot" />
+    <field field.name="Boot_Mode" field.shift="28" field.mask="0x03" field.type="STRING" field.value="2" field.str="Signed_FW_Boot" />
+    <field field.name="Boot_Mode" field.shift="28" field.mask="0x03" field.type="STRING" field.value="3" field.str="Reserved" />
+    <field field.name="ICL_Enable" field.shift="17" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="UCSI_Enable" field.shift="16" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Boot_Priority" field.shift="13" field.mask="0x07" field.type="STRING" field.value="0" field.str="Last_Programmed" />
+    <field field.name="Boot_Priority" field.shift="13" field.mask="0x07" field.type="STRING" field.value="1" field.str="By_SET_FW_PRIORITY" />
+    <field field.name="Boot_Priority" field.shift="13" field.mask="0x07" field.type="STRING" field.value="2" field.str="Always_FW1" />
+    <field field.name="Boot_Priority" field.shift="13" field.mask="0x07" field.type="STRING" field.value="3" field.str="Always_FW2" />
+    <field field.name="Boot_Priority" field.shift="13" field.mask="0x07" field.type="STRING" field.value="4" field.str="Always_Primary" />
+    <field field.name="Alt_Mode_Query_Enable" field.shift="12" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Intr_Status_Reg_Enable" field.shift="11" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Command_QUEUE_Enable" field.shift="10" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="PD_COMMAND_Enable" field.shift="9" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="User_Reg_Enable" field.shift="8" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Major_Ver" field.shift="4" field.mask="0x0F" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Minor_Ver" field.shift="0" field.mask="0x0F" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0050" reg.addr1="0x0050" reg.name="DISABLE_BB_RST" reg.length="1">
+    <field field.name="Mode" field.shift="0" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0052" reg.addr1="0x0052" reg.name="BB_ALTMODE_STATUS" reg.length="2">
+    <field field.name="Mode1" field.shift="0" field.mask="0x03" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Mode2" field.shift="2" field.mask="0x03" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Mode3" field.shift="4" field.mask="0x03" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Mode4" field.shift="6" field.mask="0x03" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Mode5" field.shift="8" field.mask="0x03" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Mode6" field.shift="10" field.mask="0x03" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Mode7" field.shift="12" field.mask="0x03" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Mode8" field.shift="14" field.mask="0x03" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0054" reg.addr1="0x0054" reg.name="BB_OPER_MODEL" reg.length="1">
+    <field field.name="EC_Presented" field.shift="4" field.mask="0x01" field.type="STRING" field.value="0" field.str="No" />
+    <field field.name="EC_Presented" field.shift="4" field.mask="0x01" field.type="STRING" field.value="1" field.str="Yes" />
+    <field field.name="Reset_Method" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0" field.str="Reset_Based" />
+    <field field.name="Reset_Method" field.shift="0" field.mask="0x01" field.type="STRING" field.value="1" field.str="HPI_Based" />
+  </register>
+  <register reg.addr0="0x0055" reg.addr1="0x0055" reg.name="BB_FAIL_MODEL" reg.length="1">
+    <field field.name="Lack_Power" field.shift="0" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="USB_PD" field.shift="1" field.mask="0x01" field.type="INTEGRE" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0056" reg.addr1="0x0056" reg.name="BB_CMD_REG" reg.length="1">
+    <field field.name="OpCode" field.shift="0" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0057" reg.addr1="0x0057" reg.name="BB_MISC_INFO" reg.length="1">
+    <field field.name="PWR_STATUS" field.shift="0" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x0060" reg.addr1="0x0060" reg.name="2nd_EXT_VER" reg.length="8">
+    <field field.name="Ver" field.shift="0" field.mask="0xFFFFFFFFFFFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+
+  <register reg.addr0="0x0039" reg.addr1="0x0039" reg.name="UCSI_CONTROL" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x01" field.str="Start_UCSI" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x02" field.str="Stop_UCSI" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x03" field.str="Silence_UCSI" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x04" field.str="Signal_Event" />
+  </register>
+  <register reg.addr0="0x0038" reg.addr1="0x0038" reg.name="UCSI_STATUS" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0" field.str="UCSI_Started" />
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="1" field.str="UCSI_Stoped" />
+    <field field.name="NONE" field.shift="1" field.mask="0x01" field.type="STRING" field.value="0" field.str="UCSI_Idle" />
+    <field field.name="NONE" field.shift="1" field.mask="0x01" field.type="STRING" field.value="1" field.str="UCSI_CMD_Progress" />
+    <field field.name="NONE" field.shift="2" field.mask="0x01" field.type="STRING" field.value="0" field.str="No_Event_Pending" />
+    <field field.name="NONE" field.shift="2" field.mask="0x01" field.type="STRING" field.value="1" field.str="Event_Pending" />
+  </register>
+
+  <register reg.addr0="0x0040" reg.addr1="0x0040" reg.name="ICL_CTRL_REG" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0" field.str="Normal_Mode" />
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="1" field.str="Force_Mode" />
+    <field field.name="NONE" field.shift="7" field.mask="0x01" field.type="STRING" field.value="0" field.str="HPI_Event_Enabled" />
+    <field field.name="NONE" field.shift="7" field.mask="0x01" field.type="STRING" field.value="1" field.str="HPI_Event_Disabled" />
+  </register>
+  <register reg.addr0="0x0042" reg.addr1="0x0042" reg.name="ICL_STS_REG" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0" field.str="Normal_Mode" />
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="1" field.str="Force_Mode" />
+  </register>
+  <register reg.addr0="0x0046" reg.addr1="0x0046" reg.name="ICL_BB_RETIMER_CMD_REG" reg.length="2">
+    <field field.name="I2C_Addr" field.shift="0" field.mask="0x0E" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Send_CMD" field.shift="7" field.mask="0x01" field.type="STRING" field.value="1" field.str="Yes" />
+    <field field.name="Send_CMD" field.shift="7" field.mask="0x01" field.type="STRING" field.value="0" field.str="No" />
+    <field field.name="Force_Power" field.shift="8" field.mask="0x01" field.type="STRING" field.value="1" field.str="Yes" />
+    <field field.name="Force_Power" field.shift="8" field.mask="0x01" field.type="STRING" field.value="0" field.str="No" />
+  </register>
+  <register reg.addr0="0x0048" reg.addr1="0x0048" reg.name="ICL_BB_RETIMER_DAT_REG" reg.length="4">
+    <field field.name="Byte_0" field.shift="0" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Byte_1" field.shift="8" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Byte_2" field.shift="16" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Byte_3" field.shift="24" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+
+  <register reg.addr0="0x007E" reg.addr1="0x007E" reg.name="DEV_RESPONSE" reg.length="4">
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x00" field.str="No_Response" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x02" field.str="Success" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x03" field.str="Flash_Data_Available" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x05" field.str="Invalid_CMD" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x06" field.str="Invalid_State" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x07" field.str="Flash_Update_Failed" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x08" field.str="Invalid_FW" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x09" field.str="Invalid_Arguments" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0A" field.str="Not_Supported" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0C" field.str="Transaction_Failed" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0D" field.str="PD_CMD_Failed" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0F" field.str="Undefined_Error" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x10" field.str="Read_PDO_Data" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x11" field.str="CMD_Abort" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x12" field.str="Port_Busy" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x13" field.str="MIN_MAX_CURRENT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x14" field.str="EXT_SRC_CAP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x18" field.str="D_ID_RESPONSE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x19" field.str="D_SVID_RESPONSE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x1A" field.str="D_MODE_RESPONSE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x1B" field.str="CBL_COMM_NOT_ALLOWED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x1C" field.str="EXT_SNK_CAP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x40" field.str="FWCT_ID_Invalid" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x41" field.str="FWCT_Invalid_GUID" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x42" field.str="FWCT_INAVLID_FW_VER" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x43" field.str="HPI_CMD_OUT_SEQUENCE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x44" field.str="FWCT_AUTH_FAILED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x45" field.str="HASH_COMPARISON_FAILED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x80" field.str="RESET_COMPLETE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x81" field.str="MSG_QUEUE_OVERFLOW" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x82" field.str="OVER_CURRENT_DETECTED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x83" field.str="OVER_VOLTAGE_DETECTED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x84" field.str="TYPEC_CONNECT_DETECTED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x85" field.str="TYPEC_DISCONNECT_DETECTED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x86" field.str="PD_NEGOTIATION_COMPLETE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x87" field.str="SWAP_COMPLETE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x8A" field.str="PS_RDY_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x8B" field.str="GOTOMIN_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x8C" field.str="ACCEPT_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x8D" field.str="REJECT_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x8E" field.str="WAIT_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x8F" field.str="HARDRESET_COMPLETE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x90" field.str="VDM_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x91" field.str="SRC_CAP_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x92" field.str="SINK_CAP_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x93" field.str="DP_AM_ENTERED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x94" field.str="DP_AM_STATUS_UPDATE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x96" field.str="DP_SID_NOT_FOUND" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x97" field.str="MULTI_SVID_FOUND_WITH_DP_SID" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x98" field.str="CABLE_NOT_SUPPORT_DP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x99" field.str="UFP_NOT_SUPPORT_DP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x93" field.str="DATA_RESET_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x94" field.str="DATA_RESET_COMPLETE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x95" field.str="USB_ENTRY_COMPLETE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x9A" field.str="HARDRESET_SENT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x9B" field.str="SOFTRESET_SENT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x9C" field.str="CBL_RESET_SENT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x9D" field.str="SOURCEDISABLED_STATE_ENTERED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x9E" field.str="SENDERRESPONSETIMER_TIMEOUT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x9F" field.str="NO_VDM_RESPONSE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA0" field.str="UNEXPECTED_VBUS_VOLT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA1" field.str="TYPEC_ERROR_RECOVERY" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA2" field.str="BATTERY_STATUS_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA3" field.str="ALERT_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA4" field.str="NOT_SUPPORTED_MSG" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA6" field.str="EMCA_DETECTED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA7" field.str="CBL_DISCOVERY_FAILED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xAA" field.str="RP_CHANGED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xAC" field.str="EXT_MSG_SOP_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xAB" field.str="BILLBOARD_CONNECT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB0" field.str="ALT_MODE_EVENT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB1" field.str="ALT_MODE_HW_EVENT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB4" field.str="EXT_SOP_P_MSG_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB5" field.str="EXT_SOP_PP_MSG_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB6" field.str="OVER_TEMPERATURE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB8" field.str="HW_ERROR" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB9" field.str="VCONN_OCP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xBA" field.str="CC_OVP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xBB" field.str="SBU_OVP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xBC" field.str="VBUS_SCP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xBD" field.str="VBUS_RCP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xBE" field.str="SINK_STANDBY" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xC0" field.str="SoC_ACK_TIMEOUT" />
+    <field field.name="DATA_LENGTH_LSB" field.shift="8" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="DATA_LENGTH_MSB" field.shift="16" field.mask="0xFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x1400" reg.addr1="0x2400" reg.name="PD_RESPONSE" reg.length="4">
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x00" field.str="No_Response" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x02" field.str="Success" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x03" field.str="Flash_Data_Available" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x05" field.str="Invalid_CMD" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x06" field.str="Invalid_State" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x07" field.str="Flash_Update_Failed" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x08" field.str="Invalid_FW" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x09" field.str="Invalid_Arguments" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0A" field.str="Not_Supported" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0C" field.str="Transaction_Failed" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0D" field.str="PD_CMD_Failed" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0F" field.str="Undefined_Error" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x10" field.str="Read_PDO_Data" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x11" field.str="CMD_Abort" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x12" field.str="Port_Busy" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x13" field.str="MIN_MAX_CURRENT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x14" field.str="EXT_SRC_CAP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x18" field.str="D_ID_RESPONSE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x19" field.str="D_SVID_RESPONSE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x1A" field.str="D_MODE_RESPONSE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x1B" field.str="CBL_COMM_NOT_ALLOWED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x1C" field.str="EXT_SNK_CAP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x40" field.str="FWCT_ID_Invalid" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x41" field.str="FWCT_Invalid_GUID" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x42" field.str="FWCT_INAVLID_FW_VER" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x43" field.str="HPI_CMD_OUT_SEQUENCE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x44" field.str="FWCT_AUTH_FAILED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x45" field.str="HASH_COMPARISON_FAILED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x80" field.str="RESET_COMPLETE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x81" field.str="MSG_QUEUE_OVERFLOW" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x82" field.str="OVER_CURRENT_DETECTED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x83" field.str="OVER_VOLTAGE_DETECTED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x84" field.str="TYPEC_CONNECT_DETECTED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x85" field.str="TYPEC_DISCONNECT_DETECTED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x86" field.str="PD_NEGOTIATION_COMPLETE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x87" field.str="SWAP_COMPLETE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x8A" field.str="PS_RDY_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x8B" field.str="GOTOMIN_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x8C" field.str="ACCEPT_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x8D" field.str="REJECT_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x8E" field.str="WAIT_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x8F" field.str="HARDRESET_COMPLETE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x90" field.str="VDM_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x91" field.str="SRC_CAP_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x92" field.str="SINK_CAP_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x93" field.str="DP_AM_ENTERED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x94" field.str="DP_AM_STATUS_UPDATE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x96" field.str="DP_SID_NOT_FOUND" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x97" field.str="MULTI_SVID_FOUND_WITH_DP_SID" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x98" field.str="CABLE_NOT_SUPPORT_DP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x99" field.str="UFP_NOT_SUPPORT_DP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x93" field.str="DATA_RESET_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x94" field.str="DATA_RESET_COMPLETE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x95" field.str="USB_ENTRY_COMPLETE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x9A" field.str="HARDRESET_SENT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x9B" field.str="SOFTRESET_SENT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x9C" field.str="CBL_RESET_SENT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x9D" field.str="SOURCEDISABLED_STATE_ENTERED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x9E" field.str="SENDERRESPONSETIMER_TIMEOUT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x9F" field.str="NO_VDM_RESPONSE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA0" field.str="UNEXPECTED_VBUS_VOLT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA1" field.str="TYPEC_ERROR_RECOVERY" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA2" field.str="BATTERY_STATUS_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA3" field.str="ALERT_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA4" field.str="NOT_SUPPORTED_MSG" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA6" field.str="EMCA_DETECTED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xA7" field.str="CBL_DISCOVERY_FAILED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xAA" field.str="RP_CHANGED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xAC" field.str="EXT_MSG_SOP_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xAB" field.str="BILLBOARD_CONNECT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB0" field.str="ALT_MODE_EVENT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB1" field.str="ALT_MODE_HW_EVENT" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB4" field.str="EXT_SOP_P_MSG_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB5" field.str="EXT_SOP_PP_MSG_RECEIVED" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB6" field.str="OVER_TEMPERATURE" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB8" field.str="HW_ERROR" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xB9" field.str="VCONN_OCP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xBA" field.str="CC_OVP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xBB" field.str="SBU_OVP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xBC" field.str="VBUS_SCP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xBD" field.str="VBUS_RCP" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xBE" field.str="SINK_STANDBY" />
+    <field field.name="Code" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0xC0" field.str="SoC_ACK_TIMEOUT" />
+    <field field.name="DATA_LENGTH_LSB" field.shift="8" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="DATA_LENGTH_MSB" field.shift="16" field.mask="0xFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+
+  <register reg.addr0="0x1000" reg.addr1="0x2000" reg.name="DM_CONTROL" reg.length="2">
+    <field field.name="Pkt_Type" field.shift="0" field.mask="0x03" field.type="STRING" field.value="0x00" field.str="SOP" />
+    <field field.name="Pkt_Type" field.shift="0" field.mask="0x03" field.type="STRING" field.value="0x01" field.str="SOP_P" />
+    <field field.name="Pkt_Type" field.shift="0" field.mask="0x03" field.type="STRING" field.value="0x02" field.str="SOP_PP" />
+    <field field.name="NONE" field.shift="2" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PD30_Data_Msg_Request" />
+    <field field.name="NONE" field.shift="3" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Ext_Data_Msg_Request" />
+    <field field.name="NONE" field.shift="4" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="SenderResponseTimer_Disable" />
+    <field field.name="DATA_LENGTH[9:8]" field.shift="6" field.mask="0x03" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="DATA_LENGTH[7:0]" field.shift="8" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x1002" reg.addr1="0x2002" reg.name="EFFECTIVE_SRC_PDO_MASK" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO0_Enabled" />
+    <field field.name="NONE" field.shift="1" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO1_Enabled" />
+    <field field.name="NONE" field.shift="2" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO2_Enabled" />
+    <field field.name="NONE" field.shift="3" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO3_Enabled" />
+    <field field.name="NONE" field.shift="4" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO4_Enabled" />
+    <field field.name="NONE" field.shift="5" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO5_Enabled" />
+    <field field.name="NONE" field.shift="6" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO6_Enabled" />
+    <field field.name="NONE" field.shift="7" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Unconstrained_Pwr_Bit" />
+  </register>
+  <register reg.addr0="0x1003" reg.addr1="0x2003" reg.name="EFFECTIVE_SINK_PDO_MASK" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO0_Enabled" />
+    <field field.name="NONE" field.shift="1" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO1_Enabled" />
+    <field field.name="NONE" field.shift="2" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO2_Enabled" />
+    <field field.name="NONE" field.shift="3" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO3_Enabled" />
+    <field field.name="NONE" field.shift="4" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO4_Enabled" />
+    <field field.name="NONE" field.shift="5" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO5_Enabled" />
+    <field field.name="NONE" field.shift="6" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO6_Enabled" />
+    <field field.name="NONE" field.shift="7" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Unconstrained_Pwr_Bit" />
+  </register>
+  <register reg.addr0="0x1004" reg.addr1="0x2004" reg.name="SELECT_SRC_PDO" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO0_Enabled" />
+    <field field.name="NONE" field.shift="1" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO1_Enabled" />
+    <field field.name="NONE" field.shift="2" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO2_Enabled" />
+    <field field.name="NONE" field.shift="3" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO3_Enabled" />
+    <field field.name="NONE" field.shift="4" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO4_Enabled" />
+    <field field.name="NONE" field.shift="5" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO5_Enabled" />
+    <field field.name="NONE" field.shift="6" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO6_Enabled" />
+    <field field.name="NONE" field.shift="7" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Update_Unconstrained_Pwr_Bit" />
+  </register>
+  <register reg.addr0="0x1005" reg.addr1="0x2005" reg.name="SELECT_SINK_PDO" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO0_Selected" />
+    <field field.name="NONE" field.shift="1" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO1_Selected" />
+    <field field.name="NONE" field.shift="2" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO2_Selected" />
+    <field field.name="NONE" field.shift="3" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO3_Selected" />
+    <field field.name="NONE" field.shift="4" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO4_Selected" />
+    <field field.name="NONE" field.shift="5" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO5_Selected" />
+    <field field.name="NONE" field.shift="6" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PDO6_Selected" />
+    <field field.name="NONE" field.shift="7" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Update_Unconstrained_Pwr_Bit" />
+  </register>
+  <register reg.addr0="0x1006" reg.addr1="0x2006" reg.name="PD_CONTROL" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x00" field.str="Set_Type-C_Def_Profile" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x01" field.str="Set_Type-C_1.5A_Profile" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x02" field.str="Set_Type-C_3A_Profile" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x05" field.str="Trigger_DR_SWAP" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x06" field.str="Trigger_PR_SWAP" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x07" field.str="Switch_On_Vconn" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x08" field.str="Switch_off_Vconn" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x09" field.str="Trigger_Vconn_Role_SWAP" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0A" field.str="Retrive_Port_Partner_SRC_Cap" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0B" field.str="Retrive_Port_Partner_Sink_Cap" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0C" field.str="Send_GoToMin_Msg" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0D" field.str="Send_HARD-RESET" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0E" field.str="Send_SOFT-RESET" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x0F" field.str="Send_CABLE-RESET" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x10" field.str="EC_Init_Complete" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x11" field.str="Disable_Port" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x12" field.str="Send_SOFT-RESET_SOP_P" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x13" field.str="Send_SOFT-RESET_SOP_PP" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x14" field.str="Change_PD_Port_Parameters" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x15" field.str="Abort_Pending_PD_CMD" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x16" field.str="Send_Get-SRC-Cap-Extended" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x17" field.str="Send_Get-Status" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x18" field.str="Send_Not-Supported" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x19" field.str="Send_Data-Reset" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x1A" field.str="Send_Get-Sink-Cap-Extended" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x1C" field.str="Send_Over_Voltage_Notification" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x1D" field.str="Send_Over_Current_Notification" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x1E" field.str="Send_Over_Temperature_Notification" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x1F" field.str="Send_Is-Alive_Cmd" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x20" field.str="Read_SRC_PDO" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x21" field.str="Read_SINK_PDO" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x22" field.str="Read_Sink_Min_Max_Current" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x23" field.str="Write_Sink_Min_Max_Current" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x24" field.str="Read_Extended_SRC_CAP" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x25" field.str="Write_Extended_SRC_CAP" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x26" field.str="Read_Extended_SINK_CAP" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x27" field.str="Write_Extended_SINK_CAP" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x30" field.str="Read_Discover_ID_Response" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x31" field.str="Read_Discovery_SVID_Response" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x32" field.str="Read_Discovery_MODE_Response" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x33" field.str="Read_SRC_PDO_Response" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x36" field.str="Switch_SYS_PWR_To_VBUS" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x37" field.str="Switch_SYS_PWR_To_VSYS" />
+    <field field.name="NONE" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x38" field.str="Restart_VDM_Process" />
+  </register>
+  <register reg.addr0="0x1008" reg.addr1="0x2008" reg.name="PD_STATUS" reg.length="4">
+    <field field.name="Def_Data_Role" field.shift="0" field.mask="0x03" field.type="STRING" field.value="0x00" field.str="UFP" />
+    <field field.name="Def_Data_Role" field.shift="0" field.mask="0x03" field.type="STRING" field.value="0x01" field.str="DFP" />
+    <field field.name="Def_Data_Role" field.shift="0" field.mask="0x03" field.type="STRING" field.value="0x02" field.str="DRP" />
+    <field field.name="Prefer_Data_Role" field.shift="2" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="UFP" />
+    <field field.name="Prefer_Data_Role" field.shift="2" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="DFP" />
+    <field field.name="Def_PWR_Role" field.shift="3" field.mask="0x03" field.type="STRING" field.value="0x00" field.str="SINK" />
+    <field field.name="Def_PWR_Role" field.shift="3" field.mask="0x03" field.type="STRING" field.value="0x01" field.str="SRC" />
+    <field field.name="Def_PWR_Role" field.shift="3" field.mask="0x03" field.type="STRING" field.value="0x02" field.str="DUAL" />
+    <field field.name="Prefer_PWR_Role" field.shift="4" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="SINK" />
+    <field field.name="Prefer_PWR_Role" field.shift="4" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="SRC" />
+    <field field.name="Curr_Data_Role" field.shift="6" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="UFP" />
+    <field field.name="Curr_Data_Role" field.shift="6" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="DFP" />
+    <field field.name="Curr_PWR_Role" field.shift="8" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="SINK" />
+    <field field.name="Curr_PWR_Role" field.shift="8" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="SRC" />
+    <field field.name="Contracted" field.shift="10" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="No" />
+    <field field.name="Contracted" field.shift="10" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Yes" />
+    <field field.name="ECMA_Presented" field.shift="11" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="No" />
+    <field field.name="ECMA_Presented" field.shift="11" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Yes" />
+    <field field.name="VCONN_Supplier" field.shift="12" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="No" />
+    <field field.name="VCONN_Supplier" field.shift="12" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Yes" />
+    <field field.name="VCONN_ON" field.shift="13" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="Yes" />
+    <field field.name="VCONN_ON" field.shift="13" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="No" />
+    <field field.name="NONE" field.shift="14" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="SinkTxOk" />
+    <field field.name="NONE" field.shift="14" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="SinkTxNG" />
+    <field field.name="NONE" field.shift="15" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="PE_Not_Ready" />
+    <field field.name="NONE" field.shift="15" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PE_Ready" />
+    <field field.name="NONE" field.shift="16" field.mask="0x03" field.type="STRING" field.value="0x00" field.str="PD_v20" />
+    <field field.name="NONE" field.shift="16" field.mask="0x03" field.type="STRING" field.value="0x01" field.str="PD_v30" />
+    <field field.name="Port_Partner_Support_PD30" field.shift="18" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="Not_Supported" />
+    <field field.name="Port_Partner_Support_PD30" field.shift="18" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Supported" />
+    <field field.name="Port_Partner_Support_Unchunked_Msg" field.shift="19" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="Not_Supported" />
+    <field field.name="Port_Partner_Support_Unchunked_Msg" field.shift="19" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Supported" />
+    <field field.name="NONE" field.shift="20" field.mask="0x03" field.type="STRING" field.value="0x00" field.str="No_EMCA_Detected" />
+    <field field.name="NONE" field.shift="20" field.mask="0x03" field.type="STRING" field.value="0x01" field.str="EMCA_PD_v20" />
+    <field field.name="NONE" field.shift="20" field.mask="0x03" field.type="STRING" field.value="0x02" field.str="EMCA_PD_v30" />
+    <field field.name="NONE" field.shift="22" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="Passive_Cable" />
+    <field field.name="NONE" field.shift="22" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Active_Cable" />
+  </register>
+  <register reg.addr0="0x100C" reg.addr1="0x200C" reg.name="TYPE_C_STATUS" reg.length="1">
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="Not_Connected" />
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Connected" />
+    <field field.name="NONE" field.shift="1" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="CC1_Polarity" />
+    <field field.name="NONE" field.shift="1" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="CC2_Polarity" />
+    <field field.name="NONE" field.shift="2" field.mask="0x03" field.type="STRING" field.value="0x00" field.str="Nothing_Attached" />
+    <field field.name="NONE" field.shift="2" field.mask="0x03" field.type="STRING" field.value="0x01" field.str="Sink_Attached" />
+    <field field.name="NONE" field.shift="2" field.mask="0x03" field.type="STRING" field.value="0x02" field.str="Source_Attached" />
+    <field field.name="NONE" field.shift="2" field.mask="0x03" field.type="STRING" field.value="0x03" field.str="Debug_Accessory_Attached" />
+    <field field.name="NONE" field.shift="2" field.mask="0x03" field.type="STRING" field.value="0x04" field.str="Audio_Accessory_Attached" />
+    <field field.name="NONE" field.shift="2" field.mask="0x03" field.type="STRING" field.value="0x05" field.str="Power_Accessory_Attached" />
+    <field field.name="NONE" field.shift="2" field.mask="0x03" field.type="STRING" field.value="0x06" field.str="Unsupported_Attached" />
+    <field field.name="NONE" field.shift="2" field.mask="0x03" field.type="STRING" field.value="0x07" field.str="Unsupported_Attached" />
+    <field field.name="NONE" field.shift="5" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="Ra_Not_Detected" />
+    <field field.name="NONE" field.shift="5" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Ra_Detected" />
+    <field field.name="Current_Level" field.shift="6" field.mask="0x03" field.type="STRING" field.value="0x00" field.str="Default" />
+    <field field.name="Current_Level" field.shift="6" field.mask="0x03" field.type="STRING" field.value="0x01" field.str="1.5A" />
+    <field field.name="Current_Level" field.shift="6" field.mask="0x03" field.type="STRING" field.value="0x02" field.str="3A" />
+    <field field.name="Current_Level" field.shift="6" field.mask="0x03" field.type="STRING" field.value="0x03" field.str="Invalid" />
+  </register>
+  <register reg.addr0="0x100D" reg.addr1="0x200D" reg.name="BUS_VOLTAGE" reg.length="1">
+    <field field.name="Voltage in 100mV unit" field.shift="0" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x1010" reg.addr1="0x2010" reg.name="CURRENT_PDO" reg.length="4">
+    <field field.name="PDO" field.shift="0" field.mask="0xFFFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x1014" reg.addr1="0x2014" reg.name="CURRENT_RDO" reg.length="4">
+    <field field.name="RDO" field.shift="0" field.mask="0xFFFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x1018" reg.addr1="0x2018" reg.name="CURRENT_VABLE_VDO" reg.length="4">
+    <field field.name="VDO" field.shift="0" field.mask="0xFFFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x101C" reg.addr1="0x201C" reg.name="ALT_MODE_CMD" reg.length="4">
+    <field field.name="SVID" field.shift="16" field.mask="0xFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Mode_ID" field.shift="8" field.mask="0xFF" field.type="STRING" field.value="0x00" field.str="DisplayPort" />
+    <field field.name="Mode_ID" field.shift="8" field.mask="0xFF" field.type="STRING" field.value="0x01" field.str="Thunderbolt" />
+    <field field.name="CMD_ID" field.shift="0" field.mask="0x0E" field.type="STRING" field.value="0x01" field.str="Update_Bitmask" />
+    <field field.name="CMD_ID" field.shift="0" field.mask="0x0E" field.type="STRING" field.value="0x03" field.str="Initiate_Alt_Mode_Entry" />
+    <field field.name="CMD_ID" field.shift="0" field.mask="0x0E" field.type="STRING" field.value="0x04" field.str="Initiate_Alt_Mode_Exit" />
+    <field field.name="CMD_ID" field.shift="0" field.mask="0x0E" field.type="STRING" field.value="0x05" field.str="CMD_Through_Data_Mem" />
+  </register>
+  <register reg.addr0="0x1020" reg.addr1="0x2020" reg.name="APP_HW_CMD" reg.length="4">
+    <field field.name="Data_Role" field.shift="24" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="UFP" />
+    <field field.name="Data_Role" field.shift="24" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="DFP" />
+    <field field.name="HW_Type" field.shift="16" field.mask="0x03" field.type="STRING" field.value="0x01" field.str="MUX" />
+    <field field.name="HW_Type" field.shift="16" field.mask="0x03" field.type="STRING" field.value="0x02" field.str="HPD" />
+    <field field.name="CMD_ID" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x00" field.str="MUX_ISOLATE_or_Enable_HPD" />
+    <field field.name="CMD_ID" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x01" field.str="Signal_HPD_Low" />
+    <field field.name="CMD_ID" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x02" field.str="MUX_USB3.1_or_Signal_HPD_High" />
+    <field field.name="CMD_ID" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x03" field.str="MUX_2Lane-DP+USB_or_Signal_HPD_IRQ" />
+    <field field.name="CMD_ID" field.shift="0" field.mask="0xFF" field.type="STRING" field.value="0x04" field.str="MUX_4Lan-DP_or_Disable_HPD" />
+  </register>
+  <register reg.addr0="0x1024" reg.addr1="0x2024" reg.name="EVENT_MASK" reg.length="4">
+    <field field.name="NONE" field.shift="1" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Over_Current" />
+    <field field.name="NONE" field.shift="2" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Over_Voltage" />
+    <field field.name="NONE" field.shift="3" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Type-C_Connect" />
+    <field field.name="NONE" field.shift="4" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Type-C_Disconnect" />
+    <field field.name="NONE" field.shift="5" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PD_Negotiation_Complete" />
+    <field field.name="NONE" field.shift="6" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PD_Ctrl_Msg_Received" />
+    <field field.name="NONE" field.shift="7" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="VDM_Reveived" />
+    <field field.name="NONE" field.shift="8" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="SRC_CAP_Reveived" />
+    <field field.name="NONE" field.shift="9" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="SINK_CAP_Reveived" />
+    <field field.name="NONE" field.shift="10" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="DP_AM_EVENT_Reveived" />
+    <field field.name="NONE" field.shift="11" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Time_Out_Errors" />
+    <field field.name="NONE" field.shift="12" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="EMCA_Events" />
+    <field field.name="NONE" field.shift="13" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Misc._Events" />
+    <field field.name="NONE" field.shift="14" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Billboard_Events" />
+    <field field.name="NONE" field.shift="15" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="EC_PWR_CTRL_Events" />
+    <field field.name="NONE" field.shift="16" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Over_Temperature" />
+    <field field.name="NONE" field.shift="17" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Extended_Msg_Events" />
+    <field field.name="NONE" field.shift="18" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="HW_Errors" />
+  </register>
+  <register reg.addr0="0x1028" reg.addr1="0x2028" reg.name="SWAP_RESPONSE" reg.length="1">
+    <field field.name="DR_SWAP(0:Accept/1:Reject/2:Wait/3:Not_Support)" field.shift="0" field.mask="0x03" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="PR_SWAP(0:Accept/1:Reject/2:Wait/3:Not_Support)" field.shift="2" field.mask="0x03" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="Vconn_SWAP(0:Accept/1:Reject/2:Wait/3:Not_Support)" field.shift="4" field.mask="0x03" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x1029" reg.addr1="0x2029" reg.name="ACTIVE_EC_MODES" reg.length="1">
+    <field field.name="Status" field.shift="0" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x102A" reg.addr1="0x202A" reg.name="VDM_EC_CONTROL" reg.length="1">
+    <field field.name="EC_CTRL_EN" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="Disabled" />
+    <field field.name="EC_CTRL_EN" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Enabled" />
+    <field field.name="EC_EXTD_MSG_EN" field.shift="1" field.mask="0x01" field.type="STRING" field.value="0x00" field.str="Disabled" />
+    <field field.name="EC_EXTD_MSG_EN" field.shift="1" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="Enabled" />
+  </register>
+  <register reg.addr0="0x102B" reg.addr1="0x202B" reg.name="ALT_MODE_STATUS" reg.length="1">
+    <field field.name="Discovery_Complete" field.shift="7" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="DP_Active" field.shift="1" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="TBT_Active" field.shift="0" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x102C" reg.addr1="0x202C" reg.name="BC_12_CONTROL" reg.length="1">
+    <field field.name="BC_12_Enable" field.shift="0" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x1030" reg.addr1="0x2030" reg.name="CMD_TIMEOUT" reg.length="1">
+    <field field.name="Timeout" field.shift="0" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x1031" reg.addr1="0x2031" reg.name="FRS_ENABLE" reg.length="1">
+    <field field.name="FRS_RX_Enable" field.shift="0" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="FRS_TX_Enable" field.shift="1" field.mask="0x01" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x1034" reg.addr1="0x2034" reg.name="PORT_INTR_STATUS" reg.length="4">
+    <field field.name="NONE" field.shift="0" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="CC_ATTACH" />
+    <field field.name="NONE" field.shift="1" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="CC_DETACH" />
+    <field field.name="NONE" field.shift="2" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="CONTRACT_CMPLT" />
+    <field field.name="NONE" field.shift="3" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="PR_SWAP_CMPLT" />
+    <field field.name="NONE" field.shift="4" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="DR_SWAP_CMPLT" />
+    <field field.name="NONE" field.shift="5" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="VCONN_SWAP_CMPLT" />
+    <field field.name="NONE" field.shift="6" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="HARD_RESET_Received" />
+    <field field.name="NONE" field.shift="7" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="HARD_RESET_SENT" />
+    <field field.name="NONE" field.shift="8" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="SOFT_RESET_Received" />
+    <field field.name="NONE" field.shift="9" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="CABLE_RESET_SENT" />
+    <field field.name="NONE" field.shift="10" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="CC_Error_Recovery" />
+    <field field.name="NONE" field.shift="11" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="SRC_DISABLE" />
+    <field field.name="NONE" field.shift="12" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="EMCA_DETECTED" />
+    <field field.name="NONE" field.shift="13" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="CBL_DISC_FAIL" />
+    <field field.name="NONE" field.shift="16" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="ALT_MODE_ENTRY" />
+    <field field.name="NONE" field.shift="17" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="ALT_MODE_EXIT" />
+    <field field.name="NONE" field.shift="29" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="UNEXPECTED_VOLTAGE" />
+    <field field.name="NONE" field.shift="30" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="VBUS_OVER_VOLTAGE" />
+    <field field.name="NONE" field.shift="31" field.mask="0x01" field.type="STRING" field.value="0x01" field.str="VBUS_OVER_CURRENT" />
+  </register>
+  <register reg.addr0="0x1038" reg.addr1="0x2038" reg.name="PORT_USER_REGS" reg.length="24">
+    <field field.name="NONE" field.shift="0" field.mask="0xFFFFFFFFFFFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="NONE" field.shift="64" field.mask="0xFFFFFFFFFFFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="NONE" field.shift="128" field.mask="0xFFFFFFFFFFFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x1050" reg.addr1="0x2050" reg.name="ACT_CBL_VDL_2" reg.length="4">
+    <field field.name="VDO" field.shift="0" field.mask="0xFFFFFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x1060" reg.addr1="0x2060" reg.name="ALT_MODE_MASK" reg.length="2">
+    <field field.name="DFP" field.shift="0" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+    <field field.name="UFP" field.shift="0" field.mask="0xFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+  <register reg.addr0="0x1062" reg.addr1="0x2062" reg.name="ALT_MODE_SVID" reg.length="2">
+    <field field.name="SVID" field.shift="0" field.mask="0xFFFF" field.type="INTEGER" field.value="NONE" field.str="NONE" />
+  </register>
+</registers>
