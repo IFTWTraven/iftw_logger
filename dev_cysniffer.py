@@ -195,28 +195,61 @@ def find_running_app(app_name):
             restore_minimized_window(proc.info['pid'])
             return proc
 
+
+def _resolve_cy4500_main_window(process_id, timeout_seconds=10.0):
+    title_pattern = r"EZ-PD.*Protocol Analyzer Utility"
+    deadline = time.time() + timeout_seconds
+
+    while time.time() < deadline:
+        try:
+            windows = Desktop(backend="uia").windows()
+        except Exception:
+            windows = []
+
+        for window in windows:
+            try:
+                if window.process_id() != process_id:
+                    continue
+                title = window.window_text() or ""
+                if re.search(title_pattern, title, re.IGNORECASE):
+                    return window
+            except Exception:
+                continue
+
+        time.sleep(0.2)
+
+    return None
+
+
+def _is_cached_window_alive(main_window):
+    if main_window is None:
+        return False
+    try:
+        main_window.wait("exists", timeout=0.5)
+        return True
+    except Exception:
+        return False
+
 # Function to launch the application
-def search_and_run_cysniffer():
+def search_and_run_cysniffer(launch_if_missing=True):
 #    app_name = "EZ-PD Protocol Analyzer Utility"  # Replace this with the name of the app you're searching for
     app_name2 = "EZ_PD_Protocol_Analyzer_Utility.exe"  # Replace this with the name of the app you're searching for
 #    app_title = "CY4500 EZ-PD™ Protocol Analyzer Utility"
-    app_title = "EZ-PD™ Protocol Analyzer Utility"
+
     # Check if the application is already running
     running_app = find_running_app(app_name2)
     if running_app:
         log_checkpoint("CY4500", "APP", "CY4500 app already running", pid=running_app.info['pid'])
-#        print(f"{app_name} is already running (PID: {running_app.info['pid']}).")
-        # You can return the information about the running app if needed
         app = Application(backend="uia").connect(process=running_app.info['pid'])
-#        main_window = app.window(title=app_title)
-        
-        main_window = app.window(title_re=app_title)
-        main_window.set_focus()
-        try:
-            main_window.restore()
-        except:
-            pass
-        return app
+        main_window = _resolve_cy4500_main_window(running_app.info['pid'], timeout_seconds=6.0)
+        if main_window is None:
+            raise RuntimeError("CY4500 process is running but main window was not found.")
+        activate_main_window(main_window)
+        return app, main_window
+
+    if not launch_if_missing:
+        log_checkpoint("CY4500", "APP", "CY4500 app not running and launch disabled")
+        return None, None
 
     # get current user's home directory and check if default installation is existed
     cy4500_path = r"C:\Infineon\Tools"  
@@ -225,13 +258,15 @@ def search_and_run_cysniffer():
     if os.path.exists(cy4500_bin):
         log_checkpoint("CY4500", "APP", "Launching CY4500 app", path=cy4500_bin)
         app = Application(backend="uia").start(cy4500_bin)
-        main_window = app.window(title_re=app_title)
-        main_window.set_focus()
-        try:
-            main_window.restore()
-        except:
-            pass
-        return app    
+        pid = app.process
+        main_window = _resolve_cy4500_main_window(pid, timeout_seconds=12.0)
+        if main_window is None:
+            raise RuntimeError("CY4500 launched but main window did not appear in time.")
+        activate_main_window(main_window)
+        return app, main_window
+
+    log_checkpoint("CY4500", "APP", "CY4500 executable not found", path=cy4500_bin)
+    return None, None
     """
     else:
         installation_path = find_app_installation_path_suppress(app_name)
@@ -270,14 +305,24 @@ def search_and_run_cysniffer():
 
 #     return None
 
-def CySniffer_StartCapture():
-    log_checkpoint("CY4500", "CAPTURE_START", "Starting CY4500 capture request")
-    app = search_and_run_cysniffer()
+def CySniffer_LaunchAndAttach(self=None, launch_if_missing=True):
+    if self is not None and _is_cached_window_alive(getattr(self, "cy4500_main_window", None)):
+        return getattr(self, "cy4500_app", None), self.cy4500_main_window
 
-    if app != None:
-        # Get the main window
-#        main_window = app.window(title="CY4500 EZ-PD™ Protocol Analyzer Utility")
-        main_window = app.window(title_re="EZ-PD™ Protocol Analyzer Utility")
+    app, main_window = search_and_run_cysniffer(launch_if_missing=launch_if_missing)
+
+    if self is not None:
+        self.cy4500_app = app
+        self.cy4500_main_window = main_window
+
+    return app, main_window
+
+
+def CySniffer_StartCapture(self=None):
+    log_checkpoint("CY4500", "CAPTURE_START", "Starting CY4500 capture request")
+    app, main_window = CySniffer_LaunchAndAttach(self, launch_if_missing=True)
+
+    if app is not None and main_window is not None:
 
         started = _start_cy4500_with_retry(main_window, max_retries=3)
         if started:
@@ -362,12 +407,9 @@ def _copy_to_clipboard(filepath):
 
 def CySniffer_StopCapture(self):
     log_checkpoint("CY4500", "CAPTURE_STOP", "Stopping CY4500 capture request", save=self.savetofile)
-    app = search_and_run_cysniffer()
+    app, main_window = CySniffer_LaunchAndAttach(self, launch_if_missing=False)
 
-    if app != None:
-        # Get the main window
-#        main_window = app.window(title="CY4500 EZ-PD™ Protocol Analyzer Utility")
-        main_window = app.window(title_re="EZ-PD™ Protocol Analyzer Utility")
+    if app is not None and main_window is not None:
 
         #Send CTRL+Q
         send_ctrl_q(main_window)

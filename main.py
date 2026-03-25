@@ -94,6 +94,13 @@ def runMainWindow(
         periodic_device_check_interval=periodic_device_check_interval,
     )
 
+    # Show main window immediately so UI appears first, then run startup validation.
+    window.setWindowFlags(window.windowFlags() | Qt.WindowStaysOnTopHint)
+    window.setWindowFlags(window.windowFlags() & ~Qt.WindowMaximizeButtonHint)
+    window.show()
+    app.processEvents()
+    log_checkpoint("UI", "WINDOW", "Main window shown before startup validation")
+
     target_devices = [
         (backend.SALEAE_VID, backend.SALEAE_PID, True),
         (backend.ELLISYS_VID, backend.ELLISYS_PID, True),
@@ -208,10 +215,8 @@ def runMainWindow(
         print("[UI] Skipping window display lines (76-78) temporarily.")
         return 0
     """
-    # Set the window flags to always stay on top
-    window.setWindowFlags(window.windowFlags() | Qt.WindowStaysOnTopHint)
-    window.setWindowFlags(window.windowFlags() & ~Qt.WindowMaximizeButtonHint)
-    window.show()
+    log_checkpoint("UI", "WINDOW", "Startup validation passed; scheduling post-show recorder app launch")
+    QtCore.QTimer.singleShot(200, window.on_main_window_shown)
     log_checkpoint("UI", "WINDOW", "Main window shown; entering app event loop")
 
     return app.exec_()

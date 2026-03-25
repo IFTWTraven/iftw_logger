@@ -99,6 +99,8 @@ class MainWindow_controller(QtWidgets.QMainWindow):
         self.ellisys_configstr = ''
 #        self.ellisysremote = ''
         self.need_close_ellisys_while_exit = False
+        self.cy4500_app = None
+        self.cy4500_main_window = None
 
         self.changerecdev = False
 
@@ -199,6 +201,53 @@ class MainWindow_controller(QtWidgets.QMainWindow):
         log_checkpoint("UI", "RECORDER", "Recorder combo changed", selection=self.ui.cB_RecDev.currentText())
         self.changerecdev = True
         self.on_stateChanged()
+        self._launch_saleae_for_current_selection()
+        self._launch_cy4500_for_current_selection()
+
+    def _launch_saleae_for_current_selection(self):
+        self.cB_SelectionChanged()
+        if self.recorddevice != String_SALEAE:
+            return
+
+        try:
+            if chk_LogApplicationRunning("Logic.exe"):
+                log_checkpoint("UI", "SALEAE", "Saleae app already running in main UI flow")
+                return
+
+            log_checkpoint("UI", "SALEAE", "Launching Saleae app from recorder selection flow")
+            search_and_run_saleae(self)
+            log_checkpoint("UI", "SALEAE", "Saleae app launch command sent from main UI flow")
+        except Exception as exc:
+            log_exception("UI", "SALEAE_LAUNCH", exc)
+            QMessageBox.warning(
+                self,
+                "Saleae Launch Error",
+                f"Failed to launch Saleae:\n{str(exc)}"
+            )
+
+    def _launch_cy4500_for_current_selection(self):
+        self.cB_SelectionChanged()
+        if self.recorddevice != String_SALEAE:
+            return
+
+        try:
+            log_checkpoint("UI", "CY4500", "Ensuring CY4500 launch/attach from recorder selection flow")
+            _, main_window = CySniffer_LaunchAndAttach(self, launch_if_missing=True)
+            if main_window is None:
+                raise RuntimeError("CY4500 window is not available after launch/attach.")
+            log_checkpoint("UI", "CY4500", "CY4500 launch/attach ready in main UI")
+        except Exception as exc:
+            log_exception("UI", "CY4500_LAUNCH", exc)
+            QMessageBox.warning(
+                self,
+                "CY4500 Launch Error",
+                f"Failed to launch/attach CY4500:\n{str(exc)}"
+            )
+
+    def on_main_window_shown(self):
+        log_checkpoint("UI", "LAUNCH", "Post-show hook fired; launching recorder apps for current selection")
+        self._launch_saleae_for_current_selection()
+        self._launch_cy4500_for_current_selection()
     
     def on_stateChanged(self):
         self.cB_SelectionChanged()

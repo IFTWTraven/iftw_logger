@@ -21,7 +21,7 @@ def run_StartCapture(self):
     if self.recorddevice == String_SALEAE:
         log_checkpoint("RUN", "CY4500", "Triggering CY4500 start before Saleae")
 
-        CySniffer_StartCapture()
+        CySniffer_StartCapture(self)
 
         # check if saleae is running or not
         # self.saleae_is_running = chk_LogApplicationRunning("Logic.exe")
