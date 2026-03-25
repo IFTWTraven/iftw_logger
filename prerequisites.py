@@ -73,13 +73,35 @@ def ensure_prerequisites():
                 break
 
         if not installed:
+            python_ver = f"{sys.version_info.major}.{sys.version_info.minor}"
             print(f"[Prerequisite] Optional dependency '{module_name}' is not available.")
             print("[Prerequisite] Ellisys automation will be unavailable.")
-            print("[Prerequisite] Alternatives:")
-            print("  1) Use Python 3.11/3.12 and reinstall dependencies")
-            print("  2) Use conda: conda install -c conda-forge zeroc-ice")
-            print("  3) Install Visual Studio C++ Build Tools (MSVC v14+)")
-            log_checkpoint("PREREQ", "OPTIONAL", "Optional dependency unavailable", module=module_name)
+            print(f"[Prerequisite] Python executable: {sys.executable}")
+            print(f"[Prerequisite] Python version: {python_ver}")
+            
+            # Special warning for Python 3.14+
+            if sys.version_info >= (3, 14):
+                print("\n[Prerequisite] ⚠️  WARNING: Python 3.14+ detected")
+                print(f"[Prerequisite]    zeroc-ice does NOT yet support Python {python_ver}")
+                print("[Prerequisite]    This is a known incompatibility issue.")
+                print("\n[Prerequisite] 🔧 RECOMMENDED SOLUTION:")
+                print("[Prerequisite]    Switch to Python 3.11.5 (development baseline):")
+                print("[Prerequisite]    • py -3.11 -m pip install --only-binary :all: zeroc-ice")
+                print("[Prerequisite]    • py -3.11 saleae2automation/main.py")
+                print("[Prerequisite]    OR")
+                print("[Prerequisite]    • py -3.12 -m pip install --only-binary :all: zeroc-ice")
+                print("[Prerequisite]    • py -3.12 saleae2automation/main.py")
+                print("[Prerequisite]    OR")
+                print("[Prerequisite]    Python 3.13 is not recommended for zeroc-ice on this project.")
+            
+            print("\n[Prerequisite] Other options:")
+            print("  1) Install in current Python environment (may fail on 3.14):")
+            print(f"     {sys.executable} -m pip install --only-binary :all: zeroc-ice")
+            print("  2) Use conda (better compatibility):")
+            print("     conda install -c conda-forge zeroc-ice")
+            print("  3) Install Visual Studio C++ Build Tools (MSVC v14+) for source compilation")
+            print("  4) Run 'python diagnose_ice.py' for detailed diagnostics")
+            log_checkpoint("PREREQ", "OPTIONAL", "Optional dependency unavailable", module=module_name, python_exe=sys.executable, python_version=python_ver, python_314_warning=(sys.version_info >= (3, 14)))
 
     log_checkpoint("PREREQ", "CHECK", "Prerequisite checks completed")
     return True

@@ -12,6 +12,8 @@ import traceback
 from save import SaveToFile
 from log_utils import log_checkpoint, log_exception
 
+import sys
+
 try:
     import Ice
     Ice.loadSlice("--all -I. AnalyzerRemoteControl.ice")
@@ -27,11 +29,30 @@ except Exception as exc:
 
 def _require_ice():
     if not ICE_AVAILABLE:
-        raise RuntimeError(
-            "Ellisys automation requires zeroc-ice. "
-            "Install zeroc-ice (or use Python 3.11/3.12 / conda-forge package) before using Ellisys mode. "
-            f"Import error: {ICE_IMPORT_ERROR}"
-        )
+        python_ver = f"{sys.version_info.major}.{sys.version_info.minor}"
+        
+        # Special handling for Python 3.14+
+        if sys.version_info >= (3, 14):
+            error_msg = (
+                f"❌ PYTHON {python_ver} NOT SUPPORTED for Ellisys mode\n\n"
+                f"zeroc-ice does not have pre-built wheels for Python {python_ver} yet.\n\n"
+                f"SOLUTION: Switch to Python 3.11.5 (development baseline)\n"
+                f"  • Run: py -3.11 -m pip install --only-binary :all: zeroc-ice\n"
+                f"  • Then: py -3.11 saleae2automation/main.py\n"
+                f"  • Alternative: py -3.12\n\n"
+                f"ALTERNATIVE: Use conda (may have broader compatibility)\n"
+                f"  • conda install -c conda-forge zeroc-ice\n\n"
+                f"Technical detail: {ICE_IMPORT_ERROR}"
+            )
+        else:
+            error_msg = (
+                f"Ellisys automation requires zeroc-ice.\n"
+                f"Install zeroc-ice or use Python 3.11.5 (recommended) or 3.12.\n"
+                f"Python version: {python_ver}\n"
+                f"Import error: {ICE_IMPORT_ERROR}"
+            )
+        
+        raise RuntimeError(error_msg)
     
 def trim_brackets(input_list):
     # Check if the input_list is a list with exactly one element
